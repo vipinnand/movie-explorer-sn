@@ -1,0 +1,139 @@
+import React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import { Grid } from "@mui/system";
+import { List, ListItem } from "@mui/material";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  height: "auto",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  borderRadius: "12px",
+  p: 4,
+  color: "black",
+};
+
+interface Movie {
+  Title: string;
+  Year: string;
+  Genre: string;
+  Director: string;
+  Plot: string;
+  Poster: string;
+  imdbRating: string;
+}
+
+interface ReusableModalProps {
+  open: boolean;
+  handleClose: () => void;
+  movie: Movie | null;
+}
+
+const MovieResultModal = ({ open, handleClose, movie }: ReusableModalProps) => {
+  if (!movie) return null;
+
+  const handleWishlist = () => {
+    // Get existing wishlist from localStorage
+    const existingWishlist = JSON.parse(
+      localStorage.getItem("wishlisted") || "[]"
+    );
+
+    // Check if movie already exists (by imdbID or Title)
+    const alreadyExists = existingWishlist.some(
+      (item: any) => item.Title === movie.Title
+    );
+
+    if (!alreadyExists) {
+      const updatedWishlist = [...existingWishlist, movie];
+      localStorage.setItem("wishlisted", JSON.stringify(updatedWishlist));
+      console.log("Movie added to wishlist.");
+    } else {
+      console.log("Movie is already in the wishlist.");
+    }
+  };
+  return (
+    <Modal open={open} onClose={handleClose}>
+      <Box sx={style}>
+        <Typography variant="h6" component="h2" gutterBottom>
+          {movie.Title} ({movie.Year})
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid size={6}>
+            <img
+              src={movie.Poster}
+              alt={movie.Title}
+              style={{ width: "100%", borderRadius: 8, marginBottom: 16 }}
+            />
+          </Grid>
+          <Grid size={6}>
+            <List>
+              <ListItem>
+                <Button
+                  variant="contained"
+                  color="error"
+                  sx={{ width: "250px" }}
+                >
+                  watch
+                </Button>
+              </ListItem>
+              <ListItem>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  sx={{ width: "250px" }}
+                >
+                  trailer
+                </Button>
+              </ListItem>
+              <ListItem>
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: "250px",
+                    backgroundColor: "grey",
+                    color: "white",
+                  }}
+                  onClick={handleWishlist}
+                >
+                  wishlist
+                </Button>
+              </ListItem>
+            </List>
+          </Grid>
+        </Grid>
+
+        <Typography variant="body1" gutterBottom>
+          <strong>Genre:</strong> {movie.Genre}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          <strong>Director:</strong> {movie.Director}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{ color: "text.secondary" }}
+          gutterBottom
+        >
+          {movie.Plot}
+        </Typography>
+        <Typography variant="body1" sx={{ mt: 2 }}>
+          <strong>IMDb Rating:</strong> {movie.imdbRating}
+        </Typography>
+        <Box display="flex" justifyContent="flex-end" gap={2} mt={3}>
+          <Button variant="outlined" onClick={handleClose}>
+            Close
+          </Button>
+        </Box>
+      </Box>
+    </Modal>
+  );
+};
+
+export default MovieResultModal;
