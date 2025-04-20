@@ -11,7 +11,7 @@ import {
 import LanguageIcon from "@mui/icons-material/Language";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link } from "react-router-dom";
-import "./navbar.css"; // ✅ Plain CSS, no named imports
+import "./NavBar.css"; // ✅ Plain CSS, no named imports
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
