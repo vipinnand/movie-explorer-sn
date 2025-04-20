@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import Navbar from "./components/Molecule/NavBar/NavBar";
 import Home from "./pages/Home/Home";
