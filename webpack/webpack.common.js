@@ -1,24 +1,25 @@
-// webpack/webpack.common.js
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
-  entry: './src/index.jsx',
+  entry: './src/main.tsx',
   output: {
     filename: 'bundle.[contenthash].js',
-    path: path.resolve(__dirname, '../dist'),
+    path: path.join(__dirname, '../dist'), // ✅ safer with correct __dirname
     publicPath: '/',
     clean: true,
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: 'babel-loader',
       },
@@ -30,7 +31,7 @@ export default {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      template: './index.html',
     }),
   ],
 };
