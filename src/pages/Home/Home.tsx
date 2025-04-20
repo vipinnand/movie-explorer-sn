@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Molecule/NavBar/NavBar';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -17,7 +17,7 @@ export default function Home() {
       localStorage.removeItem('searchMovie');
       return;
     }
-    
+
     const API_KEY = import.meta.env.VITE_API_KEY;
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     try {

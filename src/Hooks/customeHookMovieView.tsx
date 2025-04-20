@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { MovieDetails } from "./searchTypes";
+import React, { useEffect, useState } from 'react';
+import { MovieDetails } from './searchTypes';
 
 export const customHookMovieView = () => {
   const [movies, setMovies] = useState<MovieDetails[]>();
@@ -7,10 +7,10 @@ export const customHookMovieView = () => {
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    const storedMovies = localStorage.getItem("wishlisted");
+    const storedMovies = localStorage.getItem('wishlisted');
 
     if (!storedMovies) {
-      localStorage.setItem("wishlisted", JSON.stringify(storedMovies));
+      localStorage.setItem('wishlisted', JSON.stringify(storedMovies));
       setMovies(storedMovies); // set state from sample data
     } else {
       setMovies(JSON.parse(storedMovies)); // load from existing storage
