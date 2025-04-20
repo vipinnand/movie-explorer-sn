@@ -67,7 +67,7 @@ const Wishlist = () => {
                 title={movie.Title}
               />
               <CardContent className="wishlist-card-content">
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h4" component="div">
                   {movie.Title}
                 </Typography>
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>

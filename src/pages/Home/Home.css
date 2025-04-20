@@ -11,7 +11,18 @@
   margin: 0;
   padding: 0;
   background-color: #000;
+  background-image: url("/src/assets/poster_collage_web.jpg");
+  
 }
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75); /* Adjust darkness here */
+    z-index: 1;
+  }
 
 /* Styles for Image List */
 .image-list {
@@ -53,7 +64,7 @@
   transform: translate(-50%, -50%);
   z-index: 2;
   width: 80%;
-  max-width: 600px;
+  max-width: 700px;
   text-align: center;
 }
 
@@ -62,7 +73,7 @@
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   font-weight: bold;
   color: #fff;
   text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
@@ -71,8 +82,8 @@
 
 .movie-explorer-title {
   color: red;
-  font-weight: bold;
-  font-size: 3.5rem;
+  font-weight: 700 !important;
+  font-size: 6rem !important ;
   letter-spacing: 1px;
 }
 

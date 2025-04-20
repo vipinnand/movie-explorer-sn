@@ -7,110 +7,63 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import "./MovieDetailPage.css";
+import { Movie } from "./MovieCard";
 
-export interface Movie {
-  Title: string;
-  Year: string;
-  Rated?: string;
-  Released: string;
-  Runtime: string;
-  Genre: string;
-  Director: string;
-  Writer: string;
-  Actors: string;
-  Plot: string;
-  Language: string;
-  Country: string;
-  imdbRating: string;
-  Poster: string;
-}
 const storedMovie = localStorage.getItem("wishlisted");
 const movie: Movie | null = storedMovie ? JSON.parse(storedMovie) : null;
+
 const MovieDetailPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  
 
   return (
-    <Box
-      sx={{
-        width: "100vw",
-        height: "100vh",
-        overflow: "hidden",
-        backgroundColor: "#000",
-        color: "#fff",
-        display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-      }}
-    >
-      {/* Left Side - Text */}
-      <Box
-        sx={{
-          flex: 1,
-          zIndex: 2,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          px: isMobile ? 2 : 6,
-          py: isMobile ? 4 : 8,
-        }}
-      >
-        <Box maxWidth={600}>
+    <Box className={`movie-container ${isMobile ? "mobile" : "desktop"}`}>
+      {/* Left Side */}
+      <Box className="movie-text-section">
+        <Box className="movie-text-content">
           <Typography variant="h3" fontWeight="bold" gutterBottom>
-            {movie.Title}
+            {movie?.Title}
           </Typography>
           <Typography variant="body1" color="gray" mb={3}>
-            {movie.Plot}
+            {movie?.Plot}
           </Typography>
 
-          <Stack spacing={1} fontSize="14px" color="lightgray" mb={4}>
+          <Stack spacing={1} className="movie-info">
             <Typography>
-              <b>Year:</b> {movie.Year}
+              <b>Year:</b> {movie?.Year}
             </Typography>
             <Typography>
-              <b>Released:</b> {movie.Released}
+              <b>Released:</b> {movie?.Released}
             </Typography>
             <Typography>
-              <b>Runtime:</b> {movie.Runtime}
+              <b>Runtime:</b> {movie?.Runtime}
             </Typography>
             <Typography>
-              <b>Genre:</b> {movie.Genre}
+              <b>Genre:</b> {movie?.Genre}
             </Typography>
             <Typography>
-              <b>Director:</b> {movie.Director}
+              <b>Director:</b> {movie?.Director}
             </Typography>
             <Typography>
-              <b>Writer:</b> {movie.Writer}
+              <b>Writer:</b> {movie?.Writer}
             </Typography>
             <Typography>
-              <b>Actors:</b> {movie.Actors}
+              <b>Actors:</b> {movie?.Actors}
             </Typography>
             <Typography>
-              <b>Language:</b> {movie.Language}
+              <b>Language:</b> {movie?.Language}
             </Typography>
             <Typography>
-              <b>Country:</b> {movie.Country}
+              <b>Country:</b> {movie?.Country}
             </Typography>
             <Typography>
-              <b>IMDb Rating:</b> ⭐ {movie.imdbRating}
+              <b>IMDb Rating:</b> ⭐ {movie?.imdbRating}
             </Typography>
           </Stack>
 
-          {/* Action Buttons */}
-          <Stack direction="row" spacing={2} marginLeft={"150px"}>
-            <Button
-              sx={{
-                backgroundColor: "#e50914",
-                color: "#fff",
-                "&:hover": {
-                  backgroundColor: "#b81d24",
-                },
-                textTransform: "none",
-                fontWeight: "bold",
-              }}
-            >
-              Watch
-            </Button>
+          <Stack direction="row" spacing={2} className="movie-buttons">
+            <Button className="watch-button">Watch</Button>
             <Button variant="outlined" color="secondary">
               Trailer
             </Button>
@@ -121,35 +74,17 @@ const MovieDetailPage = () => {
         </Box>
       </Box>
 
-      {/* Right Side - Poster */}
+      {/* Right Side */}
       <Box
-        sx={{
-          flex: 1,
-          position: "relative",
-          minHeight: isMobile ? "300px" : "100vh",
-        }}
+        className={`movie-poster-section ${isMobile ? "mobile-height" : ""}`}
       >
         <Box
           component="img"
-          src={movie.Poster}
-          alt={movie.Title}
-          sx={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            filter: "brightness(0.8)",
-          }}
+          src={movie?.Poster}
+          alt={movie?.Title}
+          className="movie-poster"
         />
-
-        {/* Camouflage Overlay */}
-        <Box
-          sx={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to left, rgba(0,0,0,0.8), transparent 60%)",
-          }}
-        />
+        <Box className="movie-overlay" />
       </Box>
     </Box>
   );

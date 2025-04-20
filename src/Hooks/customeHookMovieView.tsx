@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import sampleData from "../components/sampleData";
-import { MovieDetails } from "../components/searchTypes";
+import { MovieDetails } from "./searchTypes";
 
 export const customHookMovieView = () => {
   const [movies, setMovies] = useState<MovieDetails[]>();

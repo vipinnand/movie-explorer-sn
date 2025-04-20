@@ -8,6 +8,7 @@
 .toolbar {
   display: flex;
   justify-content: space-between;
+  
 }
 
 .logo {
@@ -26,6 +27,7 @@
 .textButton {
   color: white !important;
   text-transform: none !important;
+  font-size: 1.2rem !important;
 }
 
 .langButton {
