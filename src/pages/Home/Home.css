@@ -1,0 +1,115 @@
+/* Home.css */
+
+/* Styles for the entire page */
+.home-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+}
+
+/* Styles for Image List */
+.image-list {
+  margin: 0;
+  padding: 0;
+}
+
+.image-list-item {
+  position: relative;
+}
+
+.image-item-container {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.image-item {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+}
+
+/* Centered Content */
+.center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.text-block {
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+}
+
+.movie-explorer-title {
+  color: red;
+  font-weight: bold;
+  font-size: 3.5rem;
+  letter-spacing: 1px;
+}
+
+/* Search bar */
+.search-bar {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 40px;
+  padding: 12px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.search-bar-input {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 30px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar-input input {
+  font-size: 1.1rem;
+}
+
+.search-bar-input .MuiOutlinedInput-notchedOutline {
+  border: none;
+}
+
+.search-bar-input
+  .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border: none;
+  border-radius: 10px;
+}
+
+.search-result {
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}

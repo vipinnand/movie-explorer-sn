@@ -1,8 +1,17 @@
 import React from "react";
-import { AppBar, Toolbar, Typography, Button, Box, Menu, MenuItem, IconButton } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Box,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import LanguageIcon from "@mui/icons-material/Language";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link } from "react-router-dom";
+import "./navbar.css"; // ✅ Plain CSS, no named imports
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -19,47 +28,29 @@ const Navbar = () => {
   return (
     <AppBar
       position="fixed"
+      className="appBar"
       sx={{
-        background: "linear-gradient(to bottom, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0))",
+        backgroundColor: "transparent",
         boxShadow: "none",
-        px: 2,
-        py: 1,
       }}
     >
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        {/* Left: Logo */}
-        <Typography
-          variant="h6"
-          sx={{
-            color: "red",
-            fontWeight: "bold",
-            fontSize: "1.8rem",
-            letterSpacing: 1,
-          }}
-        >
-          
+      <Toolbar className="toolbar">
+        <Typography variant="h6" className="logo">
+          {/* Add your logo text here */}
         </Typography>
 
-        {/* Right: Menu */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          {/* Home Button with Link */}
+        <Box className="menuButtons">
           <Link to="/" style={{ textDecoration: "none" }}>
-            <Button sx={{ color: "white", textTransform: "none" }}>Home</Button>
+            <Button className="textButton">Home</Button>
           </Link>
 
-          {/* Wishlist Button with Link */}
           <Link to="/Wishlist" style={{ textDecoration: "none" }}>
-            <Button sx={{ color: "white", textTransform: "none" }}>Wishlist</Button>
+            <Button className="textButton">Wishlist</Button>
           </Link>
+
           <Box>
             <Button
-              sx={{
-                backgroundColor: "rgba(255, 255, 255, 0.1)",
-                color: "white",
-                borderRadius: "20px",
-                textTransform: "none",
-                px: 2,
-              }}
+              className="langButton"
               onClick={handleLangClick}
               startIcon={<LanguageIcon />}
               endIcon={<ArrowDropDownIcon />}
@@ -70,9 +61,7 @@ const Navbar = () => {
               anchorEl={anchorEl}
               open={open}
               onClose={handleLangClose}
-              MenuListProps={{
-                "aria-labelledby": "language-button",
-              }}
+              MenuListProps={{ "aria-labelledby": "language-button" }}
             >
               <MenuItem onClick={handleLangClose}>English</MenuItem>
               <MenuItem onClick={handleLangClose}>Hindi</MenuItem>
@@ -80,21 +69,7 @@ const Navbar = () => {
             </Menu>
           </Box>
 
-          {/* Sign In Button */}
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "white",
-              color: "#000",
-              fontWeight: "bold",
-              borderRadius: "20px",
-              textTransform: "none",
-              px: 3,
-              "&:hover": {
-                backgroundColor: "#e6e6e6",
-              },
-            }}
-          >
+          <Button variant="contained" className="signInButton">
             Sign In
           </Button>
         </Box>

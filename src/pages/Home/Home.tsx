@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Molecule/NavBar/NavBar";
+import Navbar from "../../components/Molecule/NavBar/NavBar";
 import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -7,9 +7,9 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
-import MovieResultModal from "../components/Molecule/SearchedResultModal/SearchedResultModal";
-import { customHookMovieView } from "../Hooks/customeHookMovieView";
-
+import MovieResultModal from "../../components/Molecule/SearchedResultModal/SearchedResultModal";
+import { customHookMovieView } from "../../Hooks/customeHookMovieView";
+import "./Home.css"; // Import the CSS file
 
 export default function Home() {
   const [movieKeyword, setMovieKeyword] = useState("");
@@ -77,138 +77,59 @@ export default function Home() {
         handleClose={handleCloseModal}
         movie={selectedMovie}
       />
-      <Box
-        sx={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          overflowY: "hidden",
-          m: 0,
-          p: 0,
-          bgcolor: "#000",
-        }}
-      >
-        <ImageList variant="masonry" cols={cols} gap={10} sx={{ m: 0, p: 0 }}>
+      <Box className="home-container">
+        <ImageList
+          variant="masonry"
+          cols={cols}
+          gap={10}
+          className="image-list"
+        >
           {itemData.map((item, index) => (
-            <ImageListItem key={index} sx={{ position: "relative" }}>
-              <Box
-                sx={{
-                  position: "relative",
-                  borderRadius: 4,
-                  overflow: "hidden",
-                }}
-              >
+            <ImageListItem key={index} className="image-list-item">
+              <Box className="image-item-container">
                 <img
                   srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                   src={`${item.img}?w=248&fit=crop&auto=format`}
                   alt={item.title}
                   loading="lazy"
-                  style={{
-                    width: "100%",
-                    display: "block",
-                    borderRadius: "8px",
-                  }}
+                  className="image-item"
                 />
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundColor: "rgba(0, 0, 0, 0.8)",
-                    borderRadius: "8px",
-                  }}
-                />
+                <Box className="image-overlay" />
               </Box>
             </ImageListItem>
           ))}
         </ImageList>
 
-        {/* Center content */}
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            zIndex: 2,
-            width: "80%",
-            maxWidth: 600,
-            textAlign: "center",
-          }}
-        >
-          {/* Text block */}
-          <Box sx={{ mb: 4 }}>
-            <Box
-              sx={{
-                fontSize: "2.5rem",
-                fontWeight: "bold",
-                color: "#fff",
-                textShadow: "0 0 8px rgba(0,0,0,0.8)",
-                lineHeight: 1.2,
-              }}
-            >
+        <Box className="center-content">
+          <Box className="text-block">
+            <Box className="title">
               Unlimited movies,
               <br />
               TV shows and more on
             </Box>
             <Box>
-              <Typography
-                variant="h6"
-                sx={{
-                  color: "red",
-                  fontWeight: "bold",
-                  fontSize: "3.5rem",
-                  letterSpacing: 1,
-                }}
-              >
+              <Typography variant="h2" className="movie-explorer-title">
                 Movie Explorer
               </Typography>
             </Box>
           </Box>
 
-          {/* Search bar */}
-          <Box
-            sx={{
-              border: "2px solid rgba(255, 255, 255, 0.3)",
-              borderRadius: "40px",
-              padding: "12px",
-              backdropFilter: "blur(6px)",
-              WebkitBackdropFilter: "blur(6px)",
-              backgroundColor: "rgba(255, 255, 255, 0.3)",
-            }}
-          >
+          <Box className="search-bar">
             <TextField
               value={movieKeyword}
               onChange={(e) => setMovieKeyword(e.target.value)}
               fullWidth
               variant="outlined"
               placeholder="Enter your movie name to start watching."
-              sx={{
-                backgroundColor: "rgba(255,255,255,0.9)",
-                borderRadius: 10,
-                boxShadow: 3,
-                "& input": {
-                  fontSize: "1.1rem",
-                },
-                "& .MuiOutlinedInput-notchedOutline": {
-                  border: "none",
-                },
-                "& .MuiOutlinedInput-root": {
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    border: "none",
-                    borderRadius: 10,
-                  },
-                },
-              }}
+              className="search-bar-input"
             />
 
             {searchedResult.Title ? (
-              <h3 onClick={() => handleOpenModal(searchedResult)}>
-                {searchedResult.Title}{" "}
+              <h3
+                className="search-result"
+                onClick={() => handleOpenModal(searchedResult)}
+              >
+                {searchedResult.Title}
               </h3>
             ) : (
               searchedResult

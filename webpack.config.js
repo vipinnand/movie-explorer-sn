@@ -1,11 +1,14 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = {
+// Get __dirname equivalent in ES module
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
+export default {
   entry: './src/index.jsx',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist'),  // Ensure this is an absolute path
     clean: true,
     publicPath: '/',
   },

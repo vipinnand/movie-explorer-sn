@@ -1,0 +1,85 @@
+/* Wishlist.css */
+
+/* Container for the wishlist */
+.wishlist-container {
+  padding: 32px;
+}
+
+.wishlist-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+
+.divider {
+  background-color: white;
+  margin-bottom: 16px;
+}
+
+.wishlist-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center; /* Center cards horizontally */
+  align-items: flex-start; /* Align items at the top of the container */
+  row-gap: 16px; /* Add vertical gap between rows */
+  padding-top: 32px; /* Adds space between the divider and the cards */
+}
+
+.wishlist-card {
+  width: 345px;
+  display: flex;
+  flex-direction: column;
+  height: 400px; /* Set a fixed height for all cards */
+  overflow: hidden; /* Ensure overflow content is clipped */
+  border-radius: 8px; /* Optional: for rounded corners */
+}
+
+.wishlist-card-media {
+  height: 200px; /* You can adjust this height based on your preference */
+  width: 100%; /* Ensures the image takes up the full width of the container */
+  object-fit: contain; /* Ensures the entire image is visible, maintaining aspect ratio */
+  object-position: center; /* Optional: centers the image if it leaves extra space */
+}
+
+.wishlist-card-content {
+  flex-grow: 1; /* Allow content to grow and fill available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #000;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+.wishlist-card-title {
+  font-size: 1.25rem; /* Adjust font size */
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Truncate with ellipsis if the text is too long */
+}
+
+.wishlist-card-plot {
+  flex-grow: 1;
+  font-size: 0.9rem;
+  color: #c5c5c5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wishlist-card-actions {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+}
+
+.remove-button {
+  background-color: red;
+  color: white;
+}
+
+.view-button {
+  background-color: #3f51b5;
+  color: white;
+}

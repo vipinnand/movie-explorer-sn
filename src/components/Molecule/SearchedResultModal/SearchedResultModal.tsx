@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Grid } from "@mui/system";
 import { List, ListItem } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const style = {
   position: "absolute",
@@ -46,7 +48,22 @@ const SearchedResultModal = ({
 }: ReusableModalProps) => {
   if (!movie) return null;
 
+  const [wishlistedFlag, setWishlistedFlag] = useState(false);
+  useEffect(() => {
+    const existingWishlist = JSON.parse(
+      localStorage.getItem("wishlisted") || "[]"
+    );
+
+    // Check if movie already exists (by imdbID or Title)
+    const alreadyExists = existingWishlist.some(
+      (item: any) => item.Title === movie.Title
+    );
+    setWishlistedFlag(alreadyExists);
+  }, []);
+
   const handleWishlist = () => {
+    setWishlistedFlag((prev) => !prev);
+
     // Get existing wishlist from localStorage
     const existingWishlist = JSON.parse(
       localStorage.getItem("wishlisted") || "[]"
@@ -63,6 +80,10 @@ const SearchedResultModal = ({
       console.log("Movie added to wishlist.");
     } else {
       console.log("Movie is already in the wishlist.");
+      const updatedWishlist = existingWishlist.filter(
+        (item: any) => item.Title !== movie.Title
+      );
+      localStorage.setItem("wishlisted", JSON.stringify(updatedWishlist));
     }
   };
   return (
@@ -104,15 +125,25 @@ const SearchedResultModal = ({
               {!hideWishlist && (
                 <ListItem>
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     sx={{
                       width: "250px",
-                      backgroundColor: "grey",
-                      color: "white",
+                      color: wishlistedFlag ? "green" : "grey",
+                      borderColor: wishlistedFlag ? "green" : "grey",
                     }}
                     onClick={handleWishlist}
                   >
-                    wishlist
+                    {!wishlistedFlag ? (
+                      <>
+                        <FavoriteBorderIcon />
+                        &nbsp;Wishlist
+                      </>
+                    ) : (
+                      <>
+                        <FavoriteIcon />
+                        &nbsp;Wishlisted
+                      </>
+                    )}
                   </Button>
                 </ListItem>
               )}
