@@ -1,5 +1,5 @@
 import "./App.css";
-import Navbar from "./components/NavBar";
+import Navbar from "./components/Molecule/NavBar/NavBar";
 import Home from "./pages/Home";
 import Wishlist from "./pages/Wishlist";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

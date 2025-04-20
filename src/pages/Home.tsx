@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/NavBar";
+import Navbar from "../components/Molecule/NavBar/NavBar";
 import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -7,8 +7,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
-import MovieResultModal from "../components/MovieResultModal";
-import { customHookMovieView } from "../components/customeHookMovieView";
+import MovieResultModal from "../components/Molecule/SearchedResultModal/SearchedResultModal";
+import { customHookMovieView } from "../Hooks/customeHookMovieView";
 
 
 export default function Home() {

@@ -35,9 +35,15 @@ interface ReusableModalProps {
   open: boolean;
   handleClose: () => void;
   movie: Movie | null;
+  hideWishlist: boolean;
 }
 
-const MovieResultModal = ({ open, handleClose, movie }: ReusableModalProps) => {
+const SearchedResultModal = ({
+  open,
+  handleClose,
+  movie,
+  hideWishlist,
+}: ReusableModalProps) => {
   if (!movie) return null;
 
   const handleWishlist = () => {
@@ -62,8 +68,10 @@ const MovieResultModal = ({ open, handleClose, movie }: ReusableModalProps) => {
   return (
     <Modal open={open} onClose={handleClose}>
       <Box sx={style}>
-        <Typography variant="h6" component="h2" gutterBottom>
-          {movie.Title} ({movie.Year})
+        <Typography variant="h4" component="h1" gutterBottom>
+          <strong>
+            {movie.Title} ({movie.Year})
+          </strong>
         </Typography>
         <Grid container spacing={2}>
           <Grid size={6}>
@@ -93,19 +101,21 @@ const MovieResultModal = ({ open, handleClose, movie }: ReusableModalProps) => {
                   trailer
                 </Button>
               </ListItem>
-              <ListItem>
-                <Button
-                  variant="contained"
-                  sx={{
-                    width: "250px",
-                    backgroundColor: "grey",
-                    color: "white",
-                  }}
-                  onClick={handleWishlist}
-                >
-                  wishlist
-                </Button>
-              </ListItem>
+              {!hideWishlist && (
+                <ListItem>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      width: "250px",
+                      backgroundColor: "grey",
+                      color: "white",
+                    }}
+                    onClick={handleWishlist}
+                  >
+                    wishlist
+                  </Button>
+                </ListItem>
+              )}
             </List>
           </Grid>
         </Grid>
@@ -136,4 +146,4 @@ const MovieResultModal = ({ open, handleClose, movie }: ReusableModalProps) => {
   );
 };
 
-export default MovieResultModal;
+export default SearchedResultModal;

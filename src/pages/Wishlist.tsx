@@ -9,8 +9,8 @@ import {
   Box,
   Divider,
 } from "@mui/material";
-import { customHookMovieView } from "../components/customeHookMovieView";
-import MovieResultModal from "../components/MovieResultModal";
+import { customHookMovieView } from "../Hooks/customeHookMovieView";
+import SearchedResultModal from "../components/Molecule/SearchedResultModal/SearchedResultModal";
 
 const Wishlist = () => {
   const [wishlistMovie, setWishlistMovie] = useState([]);
@@ -20,12 +20,12 @@ const Wishlist = () => {
 
   const removeFromWishlist = (titleToRemove: string) => {
     const storedMovies = JSON.parse(localStorage.getItem("wishlisted") || "[]");
-    console.log(storedMovies)
+    console.log(storedMovies);
 
     const updatedMovies = storedMovies.filter(
       (movie: any) => movie.Title !== titleToRemove
     );
-    console.log(updatedMovies)
+    console.log(updatedMovies);
 
     localStorage.setItem("wishlisted", JSON.stringify(updatedMovies));
     setWishlistMovie(updatedMovies);
@@ -89,10 +89,11 @@ const Wishlist = () => {
       </Box>
 
       {selectedMovie && (
-        <MovieResultModal
+        <SearchedResultModal
           open={openModal}
           handleClose={handleCloseModal}
           movie={selectedMovie}
+          hideWishlist={true}
         />
       )}
     </Box>
