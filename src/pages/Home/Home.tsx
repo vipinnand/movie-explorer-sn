@@ -18,9 +18,8 @@ export default function Home() {
       return;
     }
 
-    
-    const API_KEY = import.meta.env.VITE_API_KEY;
-    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    const API_KEY = process.env.REACT_APP_VITE_API_KEY;
+    const BASE_URL = process.env.REACT_APP_VITE_API_BASE_URL;
     try {
       const fetchMovieName = await fetch(`${BASE_URL}?t=${value}&apikey=${API_KEY}`);
       const result = await fetchMovieName.json();

@@ -80,9 +80,12 @@ const SearchedResultModal = ({
       console.log("Movie added to wishlist.");
     } else {
       console.log("Movie is already in the wishlist.");
-      const updatedWishlist = existingWishlist.filter(
+      let updatedWishlist = existingWishlist.filter(
         (item: any) => item.Title !== movie.Title
       );
+      if(!updatedWishlist){
+        updatedWishlist = [];
+      }
       localStorage.setItem("wishlisted", JSON.stringify(updatedWishlist));
     }
   };

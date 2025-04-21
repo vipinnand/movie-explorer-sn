@@ -1,6 +1,8 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import webpack from 'webpack';
 import { fileURLToPath } from 'url';
+import Dotenv from 'dotenv-webpack';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,5 +35,15 @@ export default {
     new HtmlWebpackPlugin({
       template: './index.html',
     }),
+    new Dotenv({
+        safe: false,
+        systemvars: true,
+        silent: true,
+      }),
+      new webpack.DefinePlugin({
+        'process.env.REACT_APP_VITE_API_KEY': JSON.stringify(process.env.REACT_APP_VITE_API_KEY),
+        'process.env.REACT_APP_VITE_API_BASE_URL': JSON.stringify(process.env.REACT_APP_VITE_API_KEY),
+        // repeat for any other REACT_APP_* you need…
+      }),
   ],
 };
