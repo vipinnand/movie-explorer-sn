@@ -1,0 +1,28 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches:
+      - main # change this if you deploy from another branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v3
+
+      - name: 🧰 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 📦 Install Dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: 🛠️ Build Project
+        run: npm run build
+
+      - name: 🚀 Deploy to Vercel
+        run: npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --org ${{ secrets.VERCEL_ORG_ID }} --project ${{ secrets.VERCEL_PROJECT_ID }} --confirm
