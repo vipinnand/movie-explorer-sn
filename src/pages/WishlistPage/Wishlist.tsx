@@ -30,7 +30,7 @@ const Wishlist = () => {
   };
 
   useEffect(() => {
-    const wishlistedMovies = localStorage.getItem("wishlisted");
+    const wishlistedMovies = localStorage.getItem("wishlisted") || "[]";
     if (wishlistedMovies) {
       try {
         const parsed = JSON.parse(wishlistedMovies);

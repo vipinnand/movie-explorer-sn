@@ -51,7 +51,7 @@ const SearchedResultModal = ({
   const [wishlistedFlag, setWishlistedFlag] = useState(false);
   useEffect(() => {
     const existingWishlist = JSON.parse(
-      localStorage.getItem("wishlisted") || "[]"
+      (localStorage.getItem("wishlisted") || "[]")
     );
 
     // Check if movie already exists (by imdbID or Title)
@@ -66,7 +66,7 @@ const SearchedResultModal = ({
 
     // Get existing wishlist from localStorage
     const existingWishlist = JSON.parse(
-      localStorage.getItem("wishlisted") || "[]"
+      (localStorage.getItem("wishlisted") || "[]")
     );
 
     // Check if movie already exists (by imdbID or Title)

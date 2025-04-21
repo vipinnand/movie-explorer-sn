@@ -10,8 +10,8 @@ import {
 import "./MovieDetailPage.css";
 import { Movie } from "./MovieCard";
 
-const storedMovie = localStorage.getItem("wishlisted");
-const movie: Movie | null = storedMovie ? JSON.parse(storedMovie) : null;
+const storedMovie = localStorage.getItem("wishlisted") || "[]";
+const movie: Movie[] = JSON.parse(storedMovie);
 
 const MovieDetailPage = () => {
   const theme = useTheme();

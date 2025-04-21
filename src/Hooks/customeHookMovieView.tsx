@@ -7,14 +7,9 @@ export const customHookMovieView = () => {
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    const storedMovies = localStorage.getItem('wishlisted');
+    const storedMovies = localStorage.getItem('wishlisted') || "[]";
 
-    if (!storedMovies) {
-      localStorage.setItem('wishlisted', JSON.stringify(storedMovies));
-      setMovies(storedMovies); // set state from sample data
-    } else {
-      setMovies(JSON.parse(storedMovies)); // load from existing storage
-    }
+    setMovies(JSON.parse(storedMovies)); // set state from sample data
   }, []);
 
   const handleOpenModal = (movie: Movie) => {
