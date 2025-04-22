@@ -11,7 +11,7 @@ import {
 import LanguageIcon from "@mui/icons-material/Language";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link } from "react-router-dom";
-import "./NavBar.css"; // ✅ Plain CSS, no named imports
+import "./NavBar.css"; 
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -36,7 +36,7 @@ const Navbar = () => {
     >
       <Toolbar className="toolbar">
         <Typography variant="h6" className="logo">
-          {/* Add your logo text here */}
+          
         </Typography>
 
         <Box className="menuButtons">

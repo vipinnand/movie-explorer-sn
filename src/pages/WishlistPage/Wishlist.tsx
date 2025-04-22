@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Card,
   CardActions,
@@ -8,36 +8,33 @@ import {
   Typography,
   Box,
   Divider,
-} from "@mui/material";
-import { customHookMovieView } from "../../Hooks/customeHookMovieView";
-import SearchedResultModal from "../../components/Molecule/SearchedResultModal/SearchedResultModal";
-import "./Wishlist.css"; // Import the CSS file
+} from '@mui/material';
+import { customHookMovieView } from '../../Hooks/customeHookMovieView';
+import SearchedResultModal from '../../components/Molecule/SearchedResultModal/SearchedResultModal';
+import './Wishlist.css';
 
 const Wishlist = () => {
   const [wishlistMovie, setWishlistMovie] = useState([]);
 
-  const { selectedMovie, openModal, handleOpenModal, handleCloseModal } =
-    customHookMovieView();
+  const { selectedMovie, openModal, handleOpenModal, handleCloseModal } = customHookMovieView();
 
   const removeFromWishlist = (titleToRemove: string) => {
-    const storedMovies = JSON.parse(localStorage.getItem("wishlisted") || "[]");
-    const updatedMovies = storedMovies.filter(
-      (movie: any) => movie.Title !== titleToRemove
-    );
+    const storedMovies = JSON.parse(localStorage.getItem('wishlisted') || '[]');
+    const updatedMovies = storedMovies.filter((movie: any) => movie.Title !== titleToRemove);
 
-    localStorage.setItem("wishlisted", JSON.stringify(updatedMovies));
+    localStorage.setItem('wishlisted', JSON.stringify(updatedMovies));
     setWishlistMovie(updatedMovies);
   };
 
   useEffect(() => {
-    const wishlistedMovies = localStorage.getItem("wishlisted") || "[]";
+    const wishlistedMovies = localStorage.getItem('wishlisted') || '[]';
     if (wishlistedMovies) {
       try {
         const parsed = JSON.parse(wishlistedMovies);
         const movieArray = Array.isArray(parsed) ? parsed : [parsed];
         setWishlistMovie(movieArray);
       } catch (e) {
-        console.error("Failed to parse wishlist:", e);
+        console.error('Failed to parse wishlist:', e);
       }
     }
   }, []);
@@ -49,28 +46,36 @@ const Wishlist = () => {
       </Typography>
       <Divider className="divider" />
 
-      {/* Show message if no movies are in the wishlist */}
       {wishlistMovie.length === 0 ? (
         <Typography variant="h6" className="no-movies-message">
           No movies in your wishlist
         </Typography>
       ) : (
-        <Box className="wishlist-cards-container">
+        <section
+          className="wishlist-cards-container"
+          role="region"
+          aria-labelledby="wishlist-title"
+        >
           {wishlistMovie.map((movie: any) => (
-            <Card key={movie.imdbID || movie.Title} className="wishlist-card">
+            <Card
+              key={movie.imdbID || movie.Title}
+              className="wishlist-card"
+              tabIndex="0"
+              aria-label={`Movie title: ${movie.Title}, description: ${movie.Plot}`}
+            >
               <CardMedia
                 className="wishlist-card-media"
-                image={
-                  movie.Poster ||
-                  "/static/images/cards/contemplative-reptile.jpg"
-                }
+                image={movie.Poster || '/static/images/cards/contemplative-reptile.jpg'}
                 title={movie.Title}
+                alt={`Poster of ${movie.Title}`}
+                role="img"
+                aria-label={`Poster of ${movie.Title}`}
               />
               <CardContent className="wishlist-card-content">
                 <Typography gutterBottom variant="h4" component="div">
                   {movie.Title}
                 </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                   {movie.Plot}
                 </Typography>
               </CardContent>
@@ -80,6 +85,8 @@ const Wishlist = () => {
                   variant="contained"
                   className="view-button"
                   onClick={() => handleOpenModal(movie)}
+                  aria-label={`View details for ${movie.Title}`}
+                  tabIndex="0"
                 >
                   View Details
                 </Button>
@@ -87,13 +94,15 @@ const Wishlist = () => {
                   size="small"
                   className="remove-button"
                   onClick={() => removeFromWishlist(movie.Title)}
+                  aria-label={`Remove ${movie.Title} from wishlist`}
+                  tabIndex="0"
                 >
                   Remove from wishlist
                 </Button>
               </CardActions>
             </Card>
           ))}
-        </Box>
+        </section>
       )}
 
       {selectedMovie && (

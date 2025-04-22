@@ -36,14 +36,9 @@ export default {
       template: './index.html',
     }),
     new Dotenv({
-        safe: false,
-        systemvars: true,
-        silent: true,
-      }),
-      new webpack.DefinePlugin({
-        'process.env.REACT_APP_VITE_API_KEY': JSON.stringify(process.env.REACT_APP_VITE_API_KEY),
-        'process.env.REACT_APP_VITE_API_BASE_URL': JSON.stringify(process.env.REACT_APP_VITE_API_BASE_URL),
-        // repeat for any other REACT_APP_* you need…
-      }),
+      safe: false,
+      systemvars: true,
+      silent: true,
+    }),
   ],
 };

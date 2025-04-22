@@ -59,23 +59,23 @@ export default function Home() {
     <>
       <Navbar />
       <MovieResultModal open={openModal} handleClose={handleCloseModal} movie={selectedMovie} />
-      <Box className="home-container">
+      <main className="home-container">
         <Box className="overlay" />
         <Box className="center-content">
-          <Box className="text-block">
-            <Box className="title">
+          <section className="text-block">
+            <div className="title">
               Unlimited movies,
               <br />
               TV shows and more on
-            </Box>
+            </div>
             <Box>
               <Typography variant="h2" className="movie-explorer-title">
                 Movie Explorer
               </Typography>
             </Box>
-          </Box>
+          </section>
 
-          <Box className="search-bar">
+          <section className="search-bar">
             <TextField
               value={movieKeyword}
               onChange={(e) => setMovieKeyword(e.target.value)}
@@ -83,18 +83,30 @@ export default function Home() {
               variant="outlined"
               placeholder="Enter your movie name to start watching."
               className="search-bar-input"
+              aria-label="Movie search input"
+              tabIndex="0"
             />
 
             {searchedResult?.Title ? (
-              <h3 className="search-result" onClick={() => handleOpenModal(searchedResult)}>
+              <h3
+                className="search-result"
+                onClick={() => handleOpenModal(searchedResult)}
+                role="button"
+                tabIndex="0"
+                aria-label={`View details for ${searchedResult?.Title}`}
+              >
                 {searchedResult.Title}
               </h3>
             ) : (
-              searchedResult && <p className="search-result">{searchedResult}</p>
+              searchedResult && (
+                <p className="search-result" aria-live="polite">
+                  {searchedResult}
+                </p>
+              )
             )}
-          </Box>
+          </section>
         </Box>
-      </Box>
+      </main>
     </>
   );
 }

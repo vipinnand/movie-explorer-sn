@@ -10,5 +10,8 @@ export default merge(common, {
     historyApiFallback: true,
     hot: true,
     port: 3000,
+    headers: {
+      'Cache-Control': 'no-store',
+    },
   },
 });

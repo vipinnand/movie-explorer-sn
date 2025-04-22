@@ -7,19 +7,19 @@ export const customHookMovieView = () => {
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    const storedMovies = localStorage.getItem('wishlisted') || "[]";
+    const storedMovies = localStorage.getItem('wishlisted') || '[]';
 
-    setMovies(JSON.parse(storedMovies)); // set state from sample data
+    setMovies(JSON.parse(storedMovies));
   }, []);
 
   const handleOpenModal = (movie: Movie) => {
-    setSelectedMovie(movie); // Set selected movie data
-    setOpenModal(true); // Open modal
+    setSelectedMovie(movie);
+    setOpenModal(true);
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    setSelectedMovie(null); // Clear the selected movie
+    setSelectedMovie(null);
   };
 
   return {
