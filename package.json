@@ -8,7 +8,7 @@
     "build": "webpack --config webpack/webpack.prod.js",
     "build:uat": "webpack --config webpack/webpack.uat.js",
     "build:prod": "webpack --config webpack/webpack.prod.js",
-    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint": "eslint  .ts,.tsx,.js,.jsx",
     "format": "prettier --write .",
     "preview": "vite preview",
     "postinstall": "husky install",
