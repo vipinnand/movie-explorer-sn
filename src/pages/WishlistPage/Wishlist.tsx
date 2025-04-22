@@ -10,7 +10,7 @@ import {
   Divider,
 } from '@mui/material';
 import { customHookMovieView } from '../../Hooks/customeHookMovieView';
-import SearchedResultModal from '../../components/Molecule/SearchedResultModal/SearchedResultModal';
+import SearchedResultModal from '../../Organisim/SearchedResultModal/SearchedResultModal';
 import './Wishlist.css';
 
 const Wishlist = () => {
@@ -86,7 +86,6 @@ const Wishlist = () => {
                   className="view-button"
                   onClick={() => handleOpenModal(movie)}
                   aria-label={`View details for ${movie.Title}`}
-                  tabIndex="0"
                 >
                   View Details
                 </Button>

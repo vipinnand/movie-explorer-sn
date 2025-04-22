@@ -3,7 +3,7 @@ import Navbar from '../../components/Molecule/NavBar/NavBar';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
-import MovieResultModal from '../../components/Molecule/SearchedResultModal/SearchedResultModal';
+import MovieResultModal from '../../Organisim/SearchedResultModal/SearchedResultModal';
 import { customHookMovieView } from '../../Hooks/customeHookMovieView';
 import './Home.css';
 
