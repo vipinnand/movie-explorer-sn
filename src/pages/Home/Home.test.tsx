@@ -31,7 +31,9 @@ describe('Home Component', () => {
     fireEvent.change(input, { target: { value: 'Inception' } });
 
     await waitFor(() =>
-      expect(screen.getByRole('button', { name: /view details for inception/i })).toBeInTheDocument()
+      expect(
+        screen.getByRole('button', { name: /view details for inception/i })
+      ).toBeInTheDocument()
     );
 
     const stored = JSON.parse(localStorage.getItem('searchMovie') || '{}');

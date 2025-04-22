@@ -1,17 +1,9 @@
-import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Box,
-  Menu,
-  MenuItem,
-} from "@mui/material";
-import LanguageIcon from "@mui/icons-material/Language";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Link } from "react-router-dom";
-import "./NavBar.css"; 
+import React from 'react';
+import { AppBar, Toolbar, Typography, Button, Box, Menu, MenuItem } from '@mui/material';
+import LanguageIcon from '@mui/icons-material/Language';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { Link } from 'react-router-dom';
+import './NavBar.css';
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -30,21 +22,19 @@ const Navbar = () => {
       position="fixed"
       className="appBar"
       sx={{
-        backgroundColor: "transparent",
-        boxShadow: "none",
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
       }}
     >
       <Toolbar className="toolbar">
-        <Typography variant="h6" className="logo">
-          
-        </Typography>
+        <Typography variant="h6" className="logo"></Typography>
 
         <Box className="menuButtons">
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/" style={{ textDecoration: 'none' }}>
             <Button className="textButton">Home</Button>
           </Link>
 
-          <Link to="/Wishlist" style={{ textDecoration: "none" }}>
+          <Link to="/Wishlist" style={{ textDecoration: 'none' }}>
             <Button className="textButton">Wishlist</Button>
           </Link>
 
@@ -61,7 +51,7 @@ const Navbar = () => {
               anchorEl={anchorEl}
               open={open}
               onClose={handleLangClose}
-              MenuListProps={{ "aria-labelledby": "language-button" }}
+              MenuListProps={{ 'aria-labelledby': 'language-button' }}
             >
               <MenuItem onClick={handleLangClose}>English</MenuItem>
               <MenuItem onClick={handleLangClose}>Hindi</MenuItem>

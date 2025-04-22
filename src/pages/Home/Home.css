@@ -11,18 +11,17 @@
   margin: 0;
   padding: 0;
   background-color: #000;
-  background-image: url("/src/assets/poster_collage_web.jpg");
-  
+  background-image: url('/src/assets/poster_collage_web.jpg');
 }
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.75); /* Adjust darkness here */
-    z-index: 1;
-  }
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.75); /* Adjust darkness here */
+  z-index: 1;
+}
 
 /* Styles for Image List */
 .image-list {
@@ -111,9 +110,7 @@
   border: none;
 }
 
-.search-bar-input
-  .MuiOutlinedInput-root.Mui-focused
-  .MuiOutlinedInput-notchedOutline {
+.search-bar-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border: none;
   border-radius: 10px;
 }

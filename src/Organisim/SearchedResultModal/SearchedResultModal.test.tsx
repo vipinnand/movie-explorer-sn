@@ -12,17 +12,32 @@ const mockMovie = {
 };
 
 test('renders movie title correctly', () => {
-    render(<SearchedResultModal open={true} handleClose={() => {}} movie={mockMovie} hideWishlist={false} />);
-    
-    // Use a more flexible matcher to check for the movie title
-    const movieTitle = screen.getByText((content, element) => 
+  render(
+    <SearchedResultModal
+      open={true}
+      handleClose={() => {}}
+      movie={mockMovie}
+      hideWishlist={false}
+    />
+  );
+
+  // Use a more flexible matcher to check for the movie title
+  const movieTitle = screen.getByText(
+    (content, element) =>
       content.includes('Inception') && element.tagName.toLowerCase() === 'strong'
-    );
-    expect(movieTitle).toBeInTheDocument();
-  });
-  
+  );
+  expect(movieTitle).toBeInTheDocument();
+});
+
 test('wishlist button toggles state on click', () => {
-  render(<SearchedResultModal open={true} handleClose={() => {}} movie={mockMovie} hideWishlist={false} />);
+  render(
+    <SearchedResultModal
+      open={true}
+      handleClose={() => {}}
+      movie={mockMovie}
+      hideWishlist={false}
+    />
+  );
   const wishlistButton = screen.getByText(/wishlist/i);
   fireEvent.click(wishlistButton);
   expect(wishlistButton).toHaveTextContent(/Wishlisted/i);

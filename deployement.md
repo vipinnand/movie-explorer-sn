@@ -5,17 +5,21 @@ This document provides a guide to deploy your **Movie Explorer App** in differen
 ## 🌍 Recommended Deployment Architecture
 
 ### 1. **Production Environment**
+
 For production, we recommend using a **static file host** such as **Netlify**, **Vercel**, or **AWS S3 + CloudFront**.
 
 #### **Recommended Platforms:**
+
 - **Netlify**: Easy continuous deployment from GitHub and excellent for single-page apps.
 - **Vercel**: Automatically optimizes and deploys for production.
 - **AWS S3 + CloudFront**: Ideal for high scalability and security, but requires more manual setup.
 
 ### 2. **UAT Environment**
+
 For UAT, you should deploy in a similar way to production but on a **staging subdomain** or a private URL where only QA or authorized users can access it for testing.
 
 #### **UAT Deployment Options:**
+
 - Use **Netlify/Vercel** for quick staging builds with different environment variables.
 - **Docker containers** (if more complex, e.g., for API integration testing).
 
@@ -24,6 +28,7 @@ For UAT, you should deploy in a similar way to production but on a **staging sub
 ## 🛠 CI/CD Recommendations
 
 ### 1. **Continuous Integration:**
+
 - **GitHub Actions**: Set up a GitHub action for building and testing your app on push to `main` or a `release` branch.
 - **CI Steps**:
   1. Install dependencies.
@@ -32,6 +37,7 @@ For UAT, you should deploy in a similar way to production but on a **staging sub
   4. Build the app using Webpack (either for UAT or production).
 
 ### 2. **Continuous Deployment:**
+
 - **Netlify/Vercel**: Automatically deploy the latest version of your app with each push to `main` (or any other branch) on GitHub.
 - **For S3**: Use a CI tool (like GitHub Actions) to upload built files to your S3 bucket.
 
@@ -72,3 +78,4 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+```

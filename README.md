@@ -1,5 +1,4 @@
-
-```markdown
+````markdown
 # Movie Explorer App
 
 ## Overview
@@ -15,14 +14,14 @@ The **Movie Explorer App** is a React-based web application that allows users to
 
 ## 🛠 Tech Stack
 
-| Area               | Tools Used                        |
-|--------------------|-----------------------------------|
-| Framework          | React (with TypeScript)           |
-| Styling            | Material UI (MUI)  |
-| Build Tool         | Vite (for dev) + Webpack (for UAT/Production) |
-| Testing            | Jest + React Testing Library      |
-| Linting & Format   | ESLint (Airbnb) + Prettier + Husky |
-| State Persistence  | localStorage                      |
+| Area              | Tools Used                                    |
+| ----------------- | --------------------------------------------- |
+| Framework         | React (with TypeScript)                       |
+| Styling           | Material UI (MUI)                             |
+| Build Tool        | Vite (for dev) + Webpack (for UAT/Production) |
+| Testing           | Jest + React Testing Library                  |
+| Linting & Format  | ESLint (Airbnb) + Prettier + Husky            |
+| State Persistence | localStorage                                  |
 
 ---
 
@@ -44,6 +43,7 @@ git clone https://github.com/yourusername/movie-explorer.git
 cd movie-explorer
 npm install
 ```
+````
 
 ### Set Up OMDB API Key
 
@@ -269,12 +269,14 @@ npm run build:prod
 The **Movie Explorer App** is a modern, responsive web application built with **React**, **Material UI (MUI)**, **Webpack**, **Tailwind CSS**, and **Jest**. This project uses best practices in frontend development, testing, CI/CD pipelines, and deployment strategies.
 
 ### Key Features:
+
 - **OMDB API integration** for searching movies.
 - **State persistence** with `localStorage`.
 - **Linting & Formatting** for consistent code quality.
 - **Testing** with **Jest** and **React Testing Library**.
 
 Feel free to clone, build, and deploy this app to any platform that suits your needs! Let me know if you need further modifications or clarifications.
+
 ```
 
 ### To Use:
@@ -283,3 +285,4 @@ Feel free to clone, build, and deploy this app to any platform that suits your n
 2. Commit and push the changes to your GitHub repository.
 
 Let me know if you need any more changes or further assistance!
+```
