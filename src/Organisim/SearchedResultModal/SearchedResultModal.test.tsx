@@ -21,7 +21,7 @@ test('renders movie title correctly', () => {
     />
   );
 
-  // Use a more flexible matcher to check for the movie title
+ 
   const movieTitle = screen.getByText(
     (content, element) =>
       content.includes('Inception') && element.tagName.toLowerCase() === 'strong'
