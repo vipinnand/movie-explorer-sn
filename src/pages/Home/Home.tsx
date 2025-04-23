@@ -6,7 +6,7 @@ import { Typography } from '@mui/material';
 import MovieResultModal from '../../Organisim/SearchedResultModal/SearchedResultModal';
 import { useCustomHookMovieView } from '../../Hooks/useCustomeHookMovieView';
 import './Home.css';
-import { useSpinner } from '../../hooks/useSpinner';
+import { useSpinner } from '../../Hooks/useSpinner';
 
 export default function Home() {
   const [movieKeyword, setMovieKeyword] = useState('');
