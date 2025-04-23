@@ -9,14 +9,14 @@ import {
   Box,
   Divider,
 } from '@mui/material';
-import { customHookMovieView } from '../../Hooks/customeHookMovieView';
+import { useCustomHookMovieView } from '../../Hooks/useCustomeHookMovieView';
 import SearchedResultModal from '../../Organisim/SearchedResultModal/SearchedResultModal';
 import './Wishlist.css';
 
 const Wishlist = () => {
   const [wishlistMovie, setWishlistMovie] = useState([]);
 
-  const { selectedMovie, openModal, handleOpenModal, handleCloseModal } = customHookMovieView();
+  const { selectedMovie, openModal, handleOpenModal, handleCloseModal } = useCustomHookMovieView();
 
   const removeFromWishlist = (titleToRemove: string) => {
     const storedMovies = JSON.parse(localStorage.getItem('wishlisted') || '[]');

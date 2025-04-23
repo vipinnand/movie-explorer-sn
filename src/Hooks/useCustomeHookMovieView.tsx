@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MovieDetails } from './searchTypes';
 
-export const customHookMovieView = () => {
+export const useCustomHookMovieView = () => {
   const [movies, setMovies] = useState<MovieDetails[]>();
   const [selectedMovie, setSelectedMovie] = useState<MovieDetails | null>(null);
   const [openModal, setOpenModal] = useState(false);

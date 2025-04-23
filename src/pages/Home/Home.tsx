@@ -4,13 +4,21 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
 import MovieResultModal from '../../Organisim/SearchedResultModal/SearchedResultModal';
-import { customHookMovieView } from '../../Hooks/customeHookMovieView';
+import { useCustomHookMovieView } from '../../Hooks/useCustomeHookMovieView';
 import './Home.css';
+import { useSpinner } from '../../hooks/useSpinner';
 
 export default function Home() {
   const [movieKeyword, setMovieKeyword] = useState('');
   const [searchedResults, setSearchedResults] = useState<any[] | null>(null);
   const [debouncedKeyword, setDebouncedKeyword] = useState('');
+  const [selectOptionMovieDetail, setSelectoptionMovieDetail] = useState<any[] | null>(null);
+
+  const { loading, showSpinner, hideSpinner, Loader } = useSpinner();
+  const { selectedMovie, openModal, handleOpenModal, handleCloseModal } = useCustomHookMovieView();
+
+  const API_KEY = process.env.REACT_APP_VITE_API_KEY;
+  const BASE_URL = process.env.REACT_APP_VITE_API_BASE_URL;
 
   const getMovies = async (value: string) => {
     if (!value) {
@@ -18,22 +26,38 @@ export default function Home() {
       setSearchedResults(null);
       return;
     }
-
-    const API_KEY = process.env.REACT_APP_VITE_API_KEY;
-    const BASE_URL = process.env.REACT_APP_VITE_API_BASE_URL;
+    showSpinner();
     try {
-      const fetchMovies = await fetch(`${BASE_URL}?s=${encodeURIComponent(value)}&apikey=${API_KEY}`);;
+      const fetchMovies = await fetch(
+        `${BASE_URL}?s=${encodeURIComponent(value)}&apikey=${API_KEY}`
+      );
       const result = await fetchMovies.json();
-
       if (result?.Response === 'True') {
         localStorage.setItem('searchMovies', JSON.stringify(result.Search));
         setSearchedResults(result.Search);
       } else {
         setSearchedResults([]);
       }
-    } catch (err) {
-      console.log(err);
+    } catch {
       setSearchedResults([]);
+    } finally {
+      hideSpinner();
+    }
+  };
+
+  const handleMovieSelect = async (movie: any) => {
+    showSpinner();
+    try {
+      const response = await fetch(
+        `${BASE_URL}?t=${encodeURIComponent(movie.Title)}&apikey=${API_KEY}`
+      );
+      const result = await response.json();
+      if (result?.Response === 'True') {
+        setSelectoptionMovieDetail(result);
+        handleOpenModal(movie);
+      }
+    } finally {
+      hideSpinner();
     }
   };
 
@@ -41,7 +65,6 @@ export default function Home() {
     const handler = setTimeout(() => {
       setDebouncedKeyword(movieKeyword);
     }, 500);
-
     return () => {
       clearTimeout(handler);
     };
@@ -55,12 +78,14 @@ export default function Home() {
     }
   }, [debouncedKeyword]);
 
-  const { selectedMovie, openModal, handleOpenModal, handleCloseModal } = customHookMovieView();
-
   return (
     <>
       <Navbar />
-      <MovieResultModal open={openModal} handleClose={handleCloseModal} movie={selectedMovie} />
+      <MovieResultModal
+        open={openModal}
+        handleClose={handleCloseModal}
+        movie={selectOptionMovieDetail}
+      />
       <main className="home-container">
         <Box className="overlay" />
         <Box className="center-content">
@@ -88,14 +113,14 @@ export default function Home() {
               aria-label="Movie search input"
               tabIndex="0"
             />
-
+            <Loader />
             {searchedResults && searchedResults.length > 0 ? (
               <div className="search-results">
                 {searchedResults.map((movie: any) => (
                   <h3
                     key={movie.imdbID}
                     className="search-result"
-                    onClick={() => handleOpenModal(movie)}
+                    onClick={() => handleMovieSelect(movie)}
                     role="button"
                     tabIndex="0"
                     aria-label={`View details for ${movie.Title}`}
@@ -105,7 +130,8 @@ export default function Home() {
                 ))}
               </div>
             ) : (
-              searchedResults !== null && (
+              searchedResults !== null &&
+              !loading && (
                 <p className="search-result" aria-live="polite">
                   No movies found or error occurred.
                 </p>
