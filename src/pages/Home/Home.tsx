@@ -22,7 +22,7 @@ export default function Home() {
     const API_KEY = process.env.REACT_APP_VITE_API_KEY;
     const BASE_URL = process.env.REACT_APP_VITE_API_BASE_URL;
     try {
-      const fetchMovies = await fetch(`${BASE_URL}?s=${encodeURIComponent(value)}&apikey=${API_KEY}`);
+      const fetchMovies = await fetch(`${BASE_URL}?i=${movie.imdbID}&apikey=${API_KEY}`);
       const result = await fetchMovies.json();
 
       if (result?.Response === 'True') {
