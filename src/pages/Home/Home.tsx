@@ -9,28 +9,32 @@ import './Home.css';
 
 export default function Home() {
   const [movieKeyword, setMovieKeyword] = useState('');
-  const [searchedResult, setSearchResult] = useState('');
+  const [searchedResults, setSearchedResults] = useState<any[]>([]); // Store multiple results here
   const [debouncedKeyword, setDebouncedKeyword] = useState('');
 
-  const getMovieName = async (value: string) => {
+  const getMovies = async (value: string) => {
     if (!value) {
-      localStorage.removeItem('searchMovie');
+      localStorage.removeItem('searchMovies');
+      setSearchedResults([]);
       return;
     }
 
     const API_KEY = process.env.REACT_APP_VITE_API_KEY;
     const BASE_URL = process.env.REACT_APP_VITE_API_BASE_URL;
     try {
-      const fetchMovieName = await fetch(`${BASE_URL}?t=${value}&apikey=${API_KEY}`);
-      const result = await fetchMovieName.json();
+      // Use the 's' parameter for searching multiple movies
+      const fetchMovies = await fetch(`${BASE_URL}?s=${encodeURIComponent(value)}&apikey=${API_KEY}`);
+      const result = await fetchMovies.json();
+
       if (result?.Response === 'True') {
-        localStorage.setItem('searchMovie', JSON.stringify(result));
-        setSearchResult(result);
+        localStorage.setItem('searchMovies', JSON.stringify(result.Search));
+        setSearchedResults(result.Search); // Store multiple movie results
       } else {
-        setSearchResult('No movie with this name');
+        setSearchedResults([]); // Reset results if no movies found
       }
     } catch (err) {
       console.log(err);
+      setSearchedResults([]); // Handle errors and reset results
     }
   };
 
@@ -46,14 +50,13 @@ export default function Home() {
 
   useEffect(() => {
     if (debouncedKeyword) {
-      getMovieName(debouncedKeyword);
+      getMovies(debouncedKeyword); // Fetch multiple results when the keyword changes
     } else {
-      setSearchResult('');
+      setSearchedResults([]); // Clear results if no keyword
     }
   }, [debouncedKeyword]);
 
-  const { movies, selectedMovie, openModal, handleOpenModal, handleCloseModal } =
-    customHookMovieView();
+  const { selectedMovie, openModal, handleOpenModal, handleCloseModal } = customHookMovieView();
 
   return (
     <>
@@ -87,20 +90,25 @@ export default function Home() {
               tabIndex="0"
             />
 
-            {searchedResult?.Title ? (
-              <h3
-                className="search-result"
-                onClick={() => handleOpenModal(searchedResult)}
-                role="button"
-                tabIndex="0"
-                aria-label={`View details for ${searchedResult?.Title}`}
-              >
-                {searchedResult.Title}
-              </h3>
+            {searchedResults.length > 0 ? (
+              <div className="search-results">
+                {searchedResults.map((movie: any) => (
+                  <h3
+                    key={movie.imdbID}
+                    className="search-result"
+                    onClick={() => handleOpenModal(movie)} // Open modal with movie details
+                    role="button"
+                    tabIndex="0"
+                    aria-label={`View details for ${movie.Title}`}
+                  >
+                    {movie.Title} ({movie.Year})
+                  </h3>
+                ))}
+              </div>
             ) : (
-              searchedResult && (
+              searchedResults.length === 0 && (
                 <p className="search-result" aria-live="polite">
-                  {searchedResult}
+                  No movies found or error occurred.
                 </p>
               )
             )}
