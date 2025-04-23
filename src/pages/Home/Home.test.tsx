@@ -20,7 +20,7 @@ describe('Home Component', () => {
   });
 
   it('saves search result to localStorage and renders movie title', async () => {
-    /
+    
     vi.stubGlobal('fetch', vi.fn()
       .mockResolvedValueOnce({
         json: () => Promise.resolve({ Response: 'True', Search: [searchMovie] }),
